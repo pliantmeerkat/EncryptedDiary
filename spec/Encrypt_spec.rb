@@ -1,14 +1,16 @@
 require './lib/Encrypt'
+require './lib/writer'
 require_relative 'test_variables'
 describe Encrypt do
+  let(:subject) { Encrypt.new }
   let(:test_vars) { TestVariableHolder.new}
   let(:input_text) { ['a', 'abcde', 'jack', 'hello world'] }
   let(:key) { [1000, 9999, 5500] }
   context 'Feature_1: Encrypt' do
     describe '#encrypt' do
-      it { expect(subject).to respond_to(:encrypt).with(2).arguments }
+      it { expect(subject).to respond_to(:encrypt).with(1).arguments }
       it 'should encrypt a message' do
-        expect(subject.encrypt('hello', 1)).not_to eq('hello') # has changed
+        expect(subject.encrypt('hello')).not_to eq('hello') # has changed
       end
     end
     describe '#cypher' do
@@ -30,10 +32,21 @@ describe Encrypt do
     end
   end
   context 'Feature_1 :Decrypt' do
-
+    describe '#decrypt' do
+      it { expect(subject).to respond_to(:decrypt) }
+    end
+    describe '#rev_cypher' do
+      it { expect(subject).respond_to?(:rev_cypher, true) }
+    end
   end
-  context 'runt - time tests' do
-
+  context 'run - time tests' do
+    describe 'can encrypt then decrypt a word' do
+      it 'can encrypt then decrypt the word' do
+        word_original = 'hello'
+        word_encrypt = subject.encrypt(word_original)
+        expect(subject.decrypt(word_encrypt)).to eq(word_original)
+      end
+    end
   end
 end
 

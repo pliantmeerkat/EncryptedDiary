@@ -1,7 +1,6 @@
 # encryption class
 class Encrypt
-  attr_reader :key # temporary attr reader - ideally should not be accessable
-
+  
   def initialize
     @letters = {}
     gen_keys
@@ -9,12 +8,16 @@ class Encrypt
 
   private
 
+  attr_reader :key # temporary attr readers - ideally should not be accessable
+  attr_reader :char_key 
+
+
   def gen_keys
     @key = rand(100..500) # generate a random key
-    @keys = (32..126).to_a.shuffle # all numbers relevent shuffled
+    @char_key = (32..126).to_a.shuffle # all numbers relevent shuffled
   end
 
-  def scramble(keys = @keys)
+  def scramble(keys = @char_key)
     count = 0
     (32..126).each do |i|
       @letters[i] = keys[count].chr
@@ -27,11 +30,24 @@ class Encrypt
     text.split('').map { |c| scramble.key(c).chr }.join('')
   end
 
+  ## decrypt methods
+
+  def rev_cypher(text)
+    text.split('').map { |c| @letters[c.codepoints.to_a.join('').to_i] }.join('')
+  end
+
   public
 
   def encrypt(text)
     @key.times do
       text = cypher(text)
+    end
+    text
+  end
+
+  def decrypt(text)
+    @key.times do
+      text = rev_cypher(text)
     end
     text
   end

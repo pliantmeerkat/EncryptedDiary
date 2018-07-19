@@ -1,8 +1,8 @@
-# diary class
+# security class
 class Security
   attr_reader :lock
 
-  def initialize(encrypt = Encrypt.new)
+  def initialize(encrypt=Encrypt.new)
     @lock = false
     @encrypt = encrypt
   end

@@ -4,7 +4,7 @@ class Diary
 
   attr_accessor :entries
   attr_reader :security
-  def initialize(security = Security.new)
+  def initialize(security=Security.new)
     @entries = {}
     @security = security
     @time = Time.new

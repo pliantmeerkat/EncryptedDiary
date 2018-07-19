@@ -21,3 +21,8 @@ after this expect an output like the one below:
     ```
 
 for more infomation check out rspecs official repository or visit: https://relishapp.com/rspec
+
+## Usage
+
+To run the application simply open irb or any other console based ruby runner.
+Then simply require the Diary.rb file and create a new Diary object. you will then be prompted to add a diary entry, do this in the console and press enter. when you are ready enter *lock* and the program will encrypt your entries, and will inform you that your encryption keys have been saved to two files *key.txt* and *char_key.txt* . these files contain the two keys needed for decryption **do not** loose these, if you do you will **not** be able to decrypt your entries!
