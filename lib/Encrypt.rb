@@ -29,10 +29,10 @@ class Encrypt
 
   public
 
-  def encrypt(text, key)
-    key.times do
+  def encrypt(text)
+    @key.times do
       text = cypher(text)
     end
+    text
   end
-
 end
