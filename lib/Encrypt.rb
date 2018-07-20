@@ -33,6 +33,7 @@ class Encrypt
   ## decrypt methods
 
   def rev_cypher(text)
+    return '' if text == nil
     text.split('').map { |c| @letters[c.codepoints.to_a.join('').to_i] }.join('')
   end
 

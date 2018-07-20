@@ -6,26 +6,20 @@ class Security
     @lock = false
     @encrypt = encrypt
   end
-
-  def encrypt_diary(entry)
+  
+  def crypt(entry, key=nil)
     crypt_entry = {}
-    entry.each do |k, v|
-      k = @encrypt.encrypt(k)
-      v = @encrypt.encrypt(v)
-      crypt_entry[k] = v
-    end
-    @lock = true
-    crypt_entry
+    out = []
+    entry.each do |i|
+      i.each do |k, v|
+        if key == nil then k = @encrypt.encrypt(k) else k = @encrypt.decrypt(k, key) end
+        if key == nil then k = @encrypt.encrypt(k) else k = @encrypt.decrypt(k, key) end
+        crypt_entry = { k => v}
+        out << crypt_entry
+        end
+      end
+    @lock = key == nil ? true : false
+    out
   end
 
-  def decrypt_diary(entry, key)
-    crypt_entry = {}
-    entry.each do |k, v|
-      k = @encrypt.decrypt(k, key)
-      v = @encrypt.decrypt(v, key)
-      crypt_entry[k] = v
-    end
-    @lock = false
-    crypt_entry
-  end
 end
