@@ -42,11 +42,12 @@ class Encrypt
     @key.times do
       text = cypher(text)
     end
+    puts "Your key is#{@key}"
     text
   end
 
-  def decrypt(text)
-    @key.times do
+  def decrypt(text, key)
+    key.times do
       text = rev_cypher(text)
     end
     text

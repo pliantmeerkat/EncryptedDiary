@@ -1,5 +1,4 @@
 require './lib/Encrypt'
-require './lib/writer'
 require_relative 'test_variables'
 describe Encrypt do
   let(:subject) { Encrypt.new }
@@ -44,11 +43,9 @@ describe Encrypt do
       it 'can encrypt then decrypt the word' do
         word_original = 'hello'
         word_encrypt = subject.encrypt(word_original)
-        expect(subject.decrypt(word_encrypt)).to eq(word_original)
+        key = subject.send(:key)
+        expect(subject.decrypt(word_encrypt, key)).to eq(word_original)
       end
     end
   end
 end
-
-
-
